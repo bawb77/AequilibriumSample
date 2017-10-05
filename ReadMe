@@ -1,0 +1,14 @@
+Code sample for Aequilibrium.
+
+Assumptions:
+1. Robots fight are matched up by descending rank.
+2. First Entry in any Land array has a castle.
+3. Autobots are cooler than Decepticons so victories are always did the Autobots win (T/F).
+4. No null or negative values for Robot stats.
+5. Lands can have negative values.
+
+
+Notes:
+1. Test Cases done in Junit5
+2. This was actually pretty neat
+3. Enjoy.

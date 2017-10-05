@@ -2,9 +2,6 @@ package com.company;
 
 import java.util.ArrayList;
 
-/**
- * Created by Heavy Arms on 10/2/2017.
- */
 class Outcome {
     private int numBattles;
     private boolean autoBotsWin;
@@ -22,23 +19,23 @@ class Outcome {
         this.doomsday = dd;
     }
 
-    public boolean getDoomsDay() {
+    private boolean getDoomsDay() {
         return doomsday;
     }
 
-    public int getNumBattles() {
+    private int getNumBattles() {
         return numBattles;
     }
 
-    public boolean getAutoBotsWin() {
+    private boolean getAutoBotsWin() {
         return autoBotsWin;
     }
 
-    public ArrayList<Robot> getAutoBotSurvivors() {
+    private ArrayList<Robot> getAutoBotSurvivors() {
         return autoBotSurvivors;
     }
 
-    public ArrayList<Robot> getDecepticonSurvivors() {
+    private ArrayList<Robot> getDecepticonSurvivors() {
         return decepticonSurvivors;
     }
 }

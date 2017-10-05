@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class RobotFight {
 
-    public Outcome RobotFight(ArrayList<Robot> unSortedRoster) {
-        ArrayList<Robot> tempAuto = new ArrayList<>(), tempDecep = new ArrayList<>(), autoBotSurvivors = new ArrayList<>(), decepticonSurvivors = new ArrayList<>();
-        int autoBotsDestroyed = 0, decepticonsDestroyed = 0;
+    public Outcome robotFight(ArrayList<Robot> unSortedRoster) {
+        ArrayList<Robot>  autoBotSurvivors = new ArrayList<>(), decepticonSurvivors = new ArrayList<>();
         Robot[] autoBots, decepticons;
         Outcome oC;
         int numBattles = 0;
@@ -18,44 +18,43 @@ public class RobotFight {
 
         for (Robot r : unSortedRoster) {
             if (r.getTeam() == 'A') {
-                tempAuto.add(r);
+                autoBotSurvivors.add(r);
             } else if (r.getTeam() == 'D') {
-                tempDecep.add(r);
+                decepticonSurvivors.add(r);
             }
         }
-        autoBots = tempAuto.toArray(new Robot[tempAuto.size()]);
-        decepticons = tempDecep.toArray(new Robot[tempDecep.size()]);
-
+        autoBots = autoBotSurvivors.toArray(new Robot[autoBotSurvivors.size()]);
+        decepticons = decepticonSurvivors.toArray(new Robot[decepticonSurvivors.size()]);
         Arrays.sort(autoBots, Collections.reverseOrder());
         Arrays.sort(decepticons, Collections.reverseOrder());
+        int smallTeamSize = min(autoBots.length, decepticons.length), bigTeamSize = max(autoBots.length, decepticons.length);
 
-        for (int i = 0; i < min(autoBots.length, decepticons.length); i++) {
-            Robot victor;
+        for (int i = 0; i < smallTeamSize; i++) {
+            Robot loser;
             if (autoBots[i].getLeader()) {
                 if (decepticons[i].getLeader()) {
                     oC = new Outcome(true);
                     return oC;
                 }
-                victor = autoBots[i];
+                loser = decepticons[i];
                 numBattles++;
-                decepticonsDestroyed++;
             } else if (decepticons[i].getLeader()) {
-                victor = decepticons[i];
+                loser = autoBots[i];
                 numBattles++;
-                autoBotsDestroyed++;
             } else {
-                victor = arena(autoBots[i], decepticons[i]);
+                loser = arena(autoBots[i], decepticons[i]);
                 numBattles++;
             }
-            if (victor.getTeam() == 'A') {
-                autoBotSurvivors.add(victor);
-                decepticonsDestroyed++;
-            } else {
-                decepticonSurvivors.add(victor);
-                autoBotsDestroyed++;
+            if (loser.getTeam() == 'D') {
+                decepticonSurvivors.remove(loser);
+
+            } else if(loser.getTeam() == 'N') {
+                System.out.print("\nBoth Robots Destroyed!\n");
+            }else{
+                autoBotSurvivors.remove(loser);
             }
         }
-        autoBotsWin = autoBotsDestroyed < decepticonsDestroyed;
+        autoBotsWin = autoBotSurvivors.size() < decepticonSurvivors.size();
         oC = new Outcome(numBattles, autoBotsWin, autoBotSurvivors, decepticonSurvivors);
         return oC;
     }
@@ -64,31 +63,36 @@ public class RobotFight {
 
         if (Math.abs(A.getSKILL() - D.getSKILL()) >= 3) {
             if (A.getSKILL() > D.getSKILL()) {
-                return A;
-            } else {
                 return D;
+            } else {
+                return A;
             }
         } else if (Math.abs(A.getSTRENGTH() - D.getSTRENGTH()) >= 3) {
             if (A.getSTRENGTH() > D.getSTRENGTH()) {
-                return A;
-            } else {
                 return D;
+            } else {
+                return A;
             }
         } else if (Math.abs(A.getCOURAGE() - D.getCOURAGE()) >= 4) {
             if (A.getCOURAGE() > D.getCOURAGE()) {
-                return A;
-            } else {
                 return D;
+            } else {
+                return A;
             }
         } else {
             int autoBotOverallRating = A.getSTRENGTH() + A.getINTELLIGENCE() + A.getSPEED() + A.getENDURANCE() + A.getFIREPOWER();
             int decepticonOverallRating = D.getSTRENGTH() + D.getINTELLIGENCE() + D.getSPEED() + D.getENDURANCE() + D.getFIREPOWER();
+            if (autoBotOverallRating == decepticonOverallRating)
+            {
+                int[] i = new int[8];
+                Robot noVictor = new Robot("",'N',i);
+                return noVictor;
+            }
             if (autoBotOverallRating > decepticonOverallRating) {
-                return A;
-            } else {
                 return D;
+            } else {
+                return A;
             }
         }
-
     }
 }

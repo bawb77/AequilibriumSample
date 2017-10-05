@@ -19,23 +19,23 @@ class Outcome {
         this.doomsday = dd;
     }
 
-    private boolean getDoomsDay() {
+    public boolean getDoomsDay() {
         return doomsday;
     }
 
-    private int getNumBattles() {
+    public int getNumBattles() {
         return numBattles;
     }
 
-    private boolean getAutoBotsWin() {
+    public boolean getAutoBotsWin() {
         return autoBotsWin;
     }
 
-    private ArrayList<Robot> getAutoBotSurvivors() {
+    public ArrayList<Robot> getAutoBotSurvivors() {
         return autoBotSurvivors;
     }
 
-    private ArrayList<Robot> getDecepticonSurvivors() {
+    public ArrayList<Robot> getDecepticonSurvivors() {
         return decepticonSurvivors;
     }
 }

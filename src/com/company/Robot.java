@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 class Robot implements Comparable<Robot> {
     private final int STRENGTH, INTELLIGENCE, SPEED, ENDURANCE, RANK, COURAGE, FIREPOWER, SKILL, overall;
-    String[] specialCase = new String[]{"optimus prime", "predaking"};
+    private final String[] specialCase = new String[]{"optimus prime", "predaking"};
     private String name;
     private char team;
     private boolean leader;
@@ -74,6 +74,7 @@ class Robot implements Comparable<Robot> {
 
     @Override
     public int compareTo(Robot o) {
-        return new Integer(this.RANK).compareTo(new Integer(o.RANK));
+        return new Integer(this.RANK).compareTo(o.RANK);
     }
+
 }

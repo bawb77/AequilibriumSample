@@ -14,10 +14,10 @@ public class Main {
         RobotFight theBattle = new RobotFight();
         Scanner sC = new Scanner(System.in);
 
-        System.out.print("Hello and welcome to the castle and robot crusher example\nPlease enter either 1 for castles or 2 for robots:");
-        int program = sC.nextInt();
+        System.out.print("Hello and welcome to the castle and robot crusher example\nPlease enter either c for castles or r for robots:");
+        String program = sC.next();
 
-        if (program == 1) {
+        if (program.contains("c")) {
             System.out.print("\nPlease input your land features below in the format x,x,x,x \n");
             String land = sC.next();
             String[] stringArray = land.split(",");
@@ -27,8 +27,8 @@ public class Main {
                 newLand[i] = Integer.parseInt(numberAsString);
             }
             CastleBuilder cB = new CastleBuilder();
-            System.out.print("There are " + cB.CastleBuilder(newLand) + " castles in this land");
-        } else if (program == 2) {
+            System.out.print("There are " + cB.castleBuilder(newLand) + " castles in this land");
+        } else if (program.contains("r")) {
             String addMore, tempHolder;
             Robot tempRobot;
             ArrayList<Robot> tempRoster = new ArrayList<>();
@@ -36,7 +36,8 @@ public class Main {
             do {
                 System.out.print("\nPlease input your challengers in the format Soundwave,D,8,9,2,6,7,5,6,10\n");
                 tempHolder = bR.readLine();
-                String[] stringArray = tempHolder.split(",");
+                String[] stringArray = tempHolder.split(": |:|, |,");
+
                 int[] tempStats = new int[stringArray.length - 2];
                 for (int i = 2; i < stringArray.length - 2; i++) {
                     String numberAsString = stringArray[i];
@@ -49,7 +50,7 @@ public class Main {
             } while (addMore.contains("y"));
             bR.close();
             sC.close();
-            Outcome oC = theBattle.RobotFight(tempRoster);
+            Outcome oC = theBattle.robotFight(tempRoster);
             if (oC.getDoomsDay()) {
                 System.out.print("All Competitors Destroyed");
             } else {

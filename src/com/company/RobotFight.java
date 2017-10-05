@@ -62,19 +62,19 @@ public class RobotFight {
 
     public Robot arena(Robot A, Robot D) {
 
-        if (Math.abs(A.getSKILL() - D.getSKILL()) > 3) {
+        if (Math.abs(A.getSKILL() - D.getSKILL()) >= 3) {
             if (A.getSKILL() > D.getSKILL()) {
                 return A;
             } else {
                 return D;
             }
-        } else if (Math.abs(A.getSTRENGTH() - D.getSTRENGTH()) > 3) {
+        } else if (Math.abs(A.getSTRENGTH() - D.getSTRENGTH()) >= 3) {
             if (A.getSTRENGTH() > D.getSTRENGTH()) {
                 return A;
             } else {
                 return D;
             }
-        } else if (Math.abs(A.getCOURAGE() - D.getCOURAGE()) > 4) {
+        } else if (Math.abs(A.getCOURAGE() - D.getCOURAGE()) >= 4) {
             if (A.getCOURAGE() > D.getCOURAGE()) {
                 return A;
             } else {

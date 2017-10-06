@@ -38,7 +38,7 @@ public class CastleBuilder {
     }
 
     public int inAValley(int position, int[] input) {
-        if(position < size){
+        if(position < size - 1){
             if (input[position] < input[position + 1]) {
                 numCastles++;
                 return position;
